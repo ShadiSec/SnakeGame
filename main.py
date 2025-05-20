@@ -32,18 +32,24 @@ while is_on:
     # Detects collision between the snake and the food.
     if snake.head.distance(food) < 15: # Checks if the snake head is within 15pts of the food.
         food.refresh() # Teleports the food to a random location.
+        scoreboard.add_point()
         scoreboard.update() # Updates the scoreboard everytime food is eaten.
         snake.extend() # Extend the snake everytime food is eaten.
 
     # Detects the collision with the wall.
     if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        is_on = False # Stops the snake from moving.
-        scoreboard.game_over() # Displays a game over message on screen.
+        # is_on = False # Stops the snake from moving.
+        # scoreboard.game_over() # Displays a game over message on screen.
+        scoreboard.reset_scoreboard()
+        snake.reset_snake()
+
 
     # Detects the collision with the tail.
     for square in snake.all_squares[1:]: # Loops through all squares in the snake body except for the snake head.
         if snake.head.distance(square) < 15: # Checks if the head is within 15pts of the body squares.
-            is_on = False # Stops the snake from moving.
-            scoreboard.game_over() # Displays a game over message.
+            # is_on = False # Stops the snake from moving.
+            # scoreboard.game_over() # Displays a game over message.
+            scoreboard.reset_scoreboard()
+            snake.reset_snake()
 
 screen.exitonclick()

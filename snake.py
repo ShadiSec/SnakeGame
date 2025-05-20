@@ -50,6 +50,14 @@ class Snake:
             self.all_squares[current_square].goto(new_x, new_y) # Moves the current square to the position of the square in front of it.
         self.all_squares[0].forward(MOVE_DISTANCE) # Moves the head of the snake by 20pts.
 
+    def reset_snake(self):
+        for square in self.all_squares:
+            square.teleport(1000, 1000)
+        self.all_squares.clear() # Clear snake body.
+        self.create_snake() # Create snake.
+        self.head = self.all_squares[0]  # Sets the head of the snake to "head".
+
+
     def up(self):
         """Turns the head of the snake North."""
         # Stops the snake from moving down if it's currently moving up.
